@@ -24,7 +24,6 @@ package org.apache.druid.data.input.nested;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.apache.druid.java.util.common.parsers.JSONPathSpec;
 import org.apache.druid.java.util.common.parsers.ObjectFlattener;
 import org.apache.druid.java.util.common.parsers.ObjectFlatteners;
@@ -33,7 +32,6 @@ import org.apache.druid.java.util.common.parsers.Parser;
 
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
-
 import java.util.List;
 import java.util.Map;
 

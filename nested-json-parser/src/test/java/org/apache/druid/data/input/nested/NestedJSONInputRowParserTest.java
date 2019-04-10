@@ -21,12 +21,10 @@ package org.apache.druid.data.input.nested;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.ImmutableList;
-
 import org.apache.druid.data.input.InputRow;
 import org.apache.druid.data.input.impl.InputRowParser;
 import org.apache.druid.indexer.HadoopDruidIndexerConfig;
 import org.apache.druid.java.util.common.DateTimes;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

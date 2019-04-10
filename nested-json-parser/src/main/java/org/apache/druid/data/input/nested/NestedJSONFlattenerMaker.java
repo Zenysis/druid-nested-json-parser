@@ -24,7 +24,6 @@ package org.apache.druid.data.input.nested;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.google.common.collect.FluentIterable;
-
 import org.apache.druid.java.util.common.parsers.JSONFlattenerMaker;
 
 import java.util.Iterator;

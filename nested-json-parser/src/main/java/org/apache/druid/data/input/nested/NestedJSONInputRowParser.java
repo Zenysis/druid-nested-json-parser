@@ -25,11 +25,8 @@ package org.apache.druid.data.input.nested;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-
 import org.apache.druid.data.input.InputRow;
 import org.apache.druid.data.input.MapBasedInputRow;
 import org.apache.druid.data.input.impl.InputRowParser;
@@ -39,10 +36,8 @@ import org.apache.druid.java.util.common.IAE;
 import org.apache.druid.java.util.common.StringUtils;
 import org.apache.druid.java.util.common.parsers.ParseException;
 import org.apache.druid.java.util.common.parsers.Parser;
-
 import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.Text;
-
 import org.joda.time.DateTime;
 
 import javax.annotation.Nullable;
@@ -52,6 +47,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.CoderResult;
 import java.nio.charset.CodingErrorAction;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,8 +75,10 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
 
     this.pivotFieldSpecs = Maps.newLinkedHashMap();
     for (final PivotFieldSpec pivotFieldSpec : pivotSpec) {
-      this.pivotFieldSpecs.put(pivotFieldSpec.getRowFieldName(),
-                               pivotFieldSpec);
+      this.pivotFieldSpecs.put(
+          pivotFieldSpec.getRowFieldName(),
+          pivotFieldSpec
+      );
     }
     // Maybe assert that pivotSpec's metrics are listed in the parseSpec?
     // Maybe assert that pivotSpec's dimension names exist in the
@@ -111,7 +110,10 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
         buffer = ByteBuffer.wrap(valueBytes.getBytes(), 0,
                                  valueBytes.getLength());
       } else {
-        throw new IAE("Can't convert type [%s] to InputRow", input.getClass().getName());
+        throw new IAE(
+          "Can't convert type [%s] to InputRow",
+          input.getClass().getName()
+        );
       }
       theMap = buildStringKeyMap(buffer);
     }
@@ -184,9 +186,10 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
     if (theMap == null) {
       return null;
     }
-    final List<InputRow> outputRows = Lists.newArrayList();
+    final List<InputRow> outputRows = new ArrayList<>();
     final Map<String, Object> baseMap = Maps.newLinkedHashMap();
-    List<Map<String, Object>> pivotedFields = Lists.newArrayList(Maps.newHashMap());
+    List<Map<String, Object>> pivotedFields = new ArrayList<>();
+    pivotedFields.add(new HashMap<>());
 
     // Build a base map containing the common columns for all new InputRows.
     for (final String key : theMap.keySet()) {
@@ -243,7 +246,7 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
   {
     final String dimension = pivotFieldSpec.getDimensionFieldName();
     final String metric = pivotFieldSpec.getMetricFieldName();
-    final List<Map<String, Object>> output = Lists.newArrayList();
+    final List<Map<String, Object>> output = new ArrayList<>();
 
     // Compute the cross of the existing pivoted fields with the new fields to
     // pivot.
@@ -254,7 +257,7 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
         if (!(v instanceof Number)) {
           throw new IAE("Metric value must be a number: %s", v);
         }
-        final Map<String, Object> newFields = Maps.newHashMap(m);
+        final Map<String, Object> newFields = new HashMap<>(m);
         newFields.put(dimension, k);
         newFields.put(metric, v);
         output.add(newFields);

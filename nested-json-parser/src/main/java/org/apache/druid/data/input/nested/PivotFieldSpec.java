@@ -24,7 +24,6 @@ package org.apache.druid.data.input.nested;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import com.google.common.base.Preconditions;
 
 import java.util.Objects;
@@ -43,11 +42,17 @@ public class PivotFieldSpec
   )
   {
     this.rowFieldName = Preconditions.checkNotNull(
-      rowFieldName, "Missing 'rowFieldName' in field spec");
+      rowFieldName,
+      "Missing 'rowFieldName' in field spec"
+    );
     this.dimensionFieldName = Preconditions.checkNotNull(
-      dimensionFieldName, "Missing 'dimensionFieldName' in field spec");
+      dimensionFieldName,
+      "Missing 'dimensionFieldName' in field spec"
+    );
     this.metricFieldName = Preconditions.checkNotNull(
-      metricFieldName, "Missing 'metricFieldName' in field spec");
+      metricFieldName,
+      "Missing 'metricFieldName' in field spec"
+    );
   }
 
   @JsonProperty
