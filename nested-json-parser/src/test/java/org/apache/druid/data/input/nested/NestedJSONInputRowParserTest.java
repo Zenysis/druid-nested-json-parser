@@ -37,11 +37,11 @@ import java.util.List;
  */
 public class NestedJSONInputRowParserTest
 {
-  private static final String jsonRow =
+  private static final String JSON_ROW =
       "{\"one\": \"foo\", \"nested\": {\"bar\": 1.0, \"baz\": 2.0}, " +
       "\"three\": \"qux\", \"timestamp\": \"1000\"}";
 
-  private static final String jsonSpec = "{" +
+  private static final String JSON_SPEC = "{" +
       "\"type\": \"nestedJson\", " +
       "\"parseSpec\": { " +
         "\"format\": \"json\", " +
@@ -54,16 +54,16 @@ public class NestedJSONInputRowParserTest
         "\"dimensionFieldName\": \"two\", " +
         "\"metricFieldName\": \"val\" }]}";
 
-  private static final ObjectMapper mapper = HadoopDruidIndexerConfig.JSON_MAPPER;
+  private static final ObjectMapper MAPPER = HadoopDruidIndexerConfig.JSON_MAPPER;
 
   private InputRowParser parser;
 
   @Before
   public void setUp() throws Exception
   {
-    parser = mapper.readValue(
-        mapper.writeValueAsBytes(
-            mapper.readValue(jsonSpec, InputRowParser.class)
+    parser = MAPPER.readValue(
+        MAPPER.writeValueAsBytes(
+            MAPPER.readValue(JSON_SPEC, InputRowParser.class)
         ),
         InputRowParser.class
     );
@@ -81,22 +81,22 @@ public class NestedJSONInputRowParserTest
   @Test
   public void testParseBatchString() throws Exception
   {
-    List<InputRow> inputRows = parser.parseBatch(jsonRow);
+    List<InputRow> inputRows = parser.parseBatch(JSON_ROW);
     Assert.assertEquals(2, inputRows.size());
   }
 
   @Test
   public void testParseBatchByteBuffer() throws Exception
   {
-    List<InputRow> inputRows = parser.parseBatch(ByteBuffer.wrap(jsonRow.getBytes(StandardCharsets.UTF_8)));
-    //Assert.assertEquals("hello world", mapper.writeValueAsString(inputRows));
+    List<InputRow> inputRows = parser.parseBatch(ByteBuffer.wrap(JSON_ROW.getBytes(StandardCharsets.UTF_8)));
+    //Assert.assertEquals("hello world", MAPPER.writeValueAsString(inputRows));
     Assert.assertEquals(2, inputRows.size());
   }
 
   @Test
   public void testParseBatchOutput() throws Exception
   {
-    List<InputRow> inputRows = parser.parseBatch(jsonRow);
+    List<InputRow> inputRows = parser.parseBatch(JSON_ROW);
     Assert.assertEquals(2, inputRows.size());
     for (InputRow inputRow : inputRows) {
       Assert.assertEquals(ImmutableList.of("one", "two", "three"),
