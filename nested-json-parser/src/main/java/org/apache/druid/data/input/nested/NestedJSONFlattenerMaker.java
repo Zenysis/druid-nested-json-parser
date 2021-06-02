@@ -31,6 +31,11 @@ import java.util.Map;
 
 public class NestedJSONFlattenerMaker extends JSONFlattenerMaker
 {
+  public NestedJSONFlattenerMaker()
+  {
+    super(false);
+  }
+
   @Override
   public Iterable<String> discoverRootFields(final JsonNode obj)
   {
