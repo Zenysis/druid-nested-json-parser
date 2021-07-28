@@ -38,8 +38,10 @@ public class NestedJSONParserModule implements DruidModule
   {
     return Arrays.asList(
         new SimpleModule("NestedJSONParserModule")
-            .registerSubtypes(new NamedType(NestedJSONInputRowParser.class,
-                                            "nestedJson"))
+            .registerSubtypes(
+                new NamedType(NestedJSONInputRowParser.class, "nestedJson"),
+                new NamedType(NestedJsonInputFormat.class, "nestedJson")
+            )
     );
   }
 
