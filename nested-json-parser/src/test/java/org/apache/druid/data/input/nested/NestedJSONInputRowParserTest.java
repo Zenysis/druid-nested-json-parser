@@ -81,7 +81,7 @@ public class NestedJSONInputRowParserTest
   @Test
   public void testParseBatchString() throws Exception
   {
-    List<InputRow> inputRows = parser.parseBatch(JSON_ROW);
+    final List<InputRow> inputRows = parser.parseBatch(JSON_ROW);
     Assert.assertEquals(2, inputRows.size());
   }
 

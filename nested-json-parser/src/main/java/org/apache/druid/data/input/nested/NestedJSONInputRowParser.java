@@ -164,7 +164,7 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
         chars.clear();
       }
     } else {
-      throw new ParseException("Failed with CoderResult[%s]", coderResult);
+      throw new ParseException(null, "Failed with CoderResult[%s]", coderResult);
     }
     return theMap;
   }
@@ -222,7 +222,7 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
       }
     }
     catch (Exception e) {
-      throw new ParseException(e, "Unparseable timestamp found! Event: %s",
+      throw new ParseException(null, e, "Unparseable timestamp found! Event: %s",
                                theMap);
     }
 
