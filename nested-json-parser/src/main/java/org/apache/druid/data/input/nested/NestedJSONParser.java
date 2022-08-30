@@ -84,7 +84,7 @@ public class NestedJSONParser implements Parser<String, Object>
       return flattener.flatten(document);
     }
     catch (Exception e) {
-      throw new ParseException(e, "Unable to parse row [%s]", input);
+      throw new ParseException(null, e, "Unable to parse row [%s]", input);
     }
   }
 }
