@@ -33,7 +33,7 @@ public class NestedJSONFlattenerMaker extends JSONFlattenerMaker
 {
   public NestedJSONFlattenerMaker()
   {
-    super(false);
+    super(false, false);
   }
 
   @Override
