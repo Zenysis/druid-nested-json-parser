@@ -16,7 +16,7 @@ druid documentation. You should end up adding a line similar to this to your
 `druid.extensions.loadList=["druid-nested-json-parser"]`
 
 ##### Building from source
-Clone the druid repo and this line to `pom.xml` in the "Community extensions"
+Clone the druid repo and add this line to `pom.xml` in the "Community extensions"
 section:
 
 ```xml
