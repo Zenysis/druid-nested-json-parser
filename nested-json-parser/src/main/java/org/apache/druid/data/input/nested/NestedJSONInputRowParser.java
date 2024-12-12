@@ -83,8 +83,22 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
     // Maybe assert that pivotSpec's metrics are listed in the parseSpec?
     // Maybe assert that pivotSpec's dimension names exist in the
     // existing specified dimensions?
+    
+    // Change going from 30 to 31:
+    // public boolean hasCustomDimensions()
+    // {
+    //   return !(dimensions == null || dimensions.isEmpty());
+    // }
+    // changed to:
+    // public boolean hasFixedDimensions()
+    // {
+    //   return dimensions != null && !dimensions.isEmpty() && !useSchemaDiscovery && !includeAllDimensions;
+    // }
+    // Rename DimensionsSpec#hasCustomDimensions to hasFixedDimensions and change the meaning subtly: it now
+    // returns true if the DimensionsSpec represents an unchanging list of dimensions, or false if there is
+    // some discovery happening. This is what call sites had expected anyway.
     Preconditions.checkArgument(
-        parseSpec.getDimensionsSpec().hasCustomDimensions(),
+        parseSpec.getDimensionsSpec().hasFixedDimensions(),
         "Dimensions must be explicitly provided and cannot be missing."
     );
 

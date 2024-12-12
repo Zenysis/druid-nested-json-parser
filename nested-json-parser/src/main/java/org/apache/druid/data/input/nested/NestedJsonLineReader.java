@@ -40,7 +40,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class NestedJsonLineReader extends TextReader
+public class NestedJsonLineReader extends TextReader.Strings
 {
   private final ObjectFlattener<JsonNode> flattener;
   private final ObjectMapper mapper;
