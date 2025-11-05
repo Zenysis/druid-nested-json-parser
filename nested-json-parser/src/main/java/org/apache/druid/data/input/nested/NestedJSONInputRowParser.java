@@ -84,7 +84,7 @@ public class NestedJSONInputRowParser implements InputRowParser<Object>
     // Maybe assert that pivotSpec's dimension names exist in the
     // existing specified dimensions?
     Preconditions.checkArgument(
-        parseSpec.getDimensionsSpec().hasCustomDimensions(),
+        parseSpec.getDimensionsSpec().hasFixedDimensions(),
         "Dimensions must be explicitly provided and cannot be missing."
     );
 
